@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Ema!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f7fa;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .card {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .name {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #ff6b6b;
+      margin: 15px 0;
+      letter-spacing: 2px;
+    }
+    
+    .message {
+      font-size: 1.2rem;
+      color: #666;
+      margin: 25px 0;
+      line-height: 1.6;
+    }
+    
+    .cake {
+      font-size: 4rem;
+      margin: 20px 0;
+    }
+    
+    .button {
+      background-color: #4e6bff;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    
+    .button:hover {
+      background-color: #3a54d6;
+      transform: translateY(-3px);
+    }
+    
+    .balloon {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: transform 1s, opacity 1s;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+      transition: transform 3s, opacity 3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="cake">🎂</div>
+    <h1>Happy Birthday</h1>
+    <div class="name">EMA</div>
+    <p class="message">Wishing you a wonderful day filled with happiness and joy!</p>
+    <button class="button" id="celebrateBtn">Celebrate!</button>
+  </div>
+
+  <script>
+    document.getElementById('celebrateBtn').addEventListener('click', function() {
+      // Change button text
+      this.textContent = "Happy Birthday! 🎉";
+      
+      // Create balloons
+      const emojis = ['🎈', '🎁', '🎉', '✨', '💖'];
+      const colors = ['#ff6b6b', '#4e6bff', '#38d9a9', '#ffd43b', '#ff96a8'];
+      
+      // Add balloons
+      for (let i = 0; i < 15; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        // Set random position around the card
+        balloon.style.left = Math.random() * 80 + 10 + '%';
+        balloon.style.top = Math.random() * 80 + 10 + '%';
+        
+        document.querySelector('.card').appendChild(balloon);
+        
+        // Animate after a tiny delay for better effect
+        setTimeout(() => {
+          balloon.style.opacity = '1';
+          balloon.style.transform = `translate(${(Math.random() * 60) - 30}px, ${-100 - Math.random() * 100}px)`;
+        }, i * 100);
+      }
+      
+      // Add simple confetti
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        
+        // Set random color
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Random shape
+        if (Math.random() > 0.5) {
+          confetti.style.borderRadius = '50%';
+        }
+        
+        // Set position at the top of the card
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '0';
+        
+        document.querySelector('.card').appendChild(confetti);
+        
+        // Animate
+        setTimeout(() => {
+          confetti.style.opacity = '0.7';
+          confetti.style.transform = `translate(${(Math.random() * 200) - 100}px, ${100 + Math.random() * 200}px) rotate(${Math.random() * 360}deg)`;
+        }, i * 50);
+      }
+      
+      // Update message
+      document.querySelector('.message').textContent = 'Ema, may your day be as wonderful as you are!';
+    });
+  </script>
+</body>
+</html>
